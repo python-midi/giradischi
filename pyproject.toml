@@ -7,6 +7,9 @@ license = "LGPL-3.0-or-later"
 readme = "README.md"
 repository = "https://github.com/SebaUbuntu/giradischi"
 
+[tool.poetry.scripts]
+giradischi = 'giradischi.main:main'
+
 [tool.poetry.dependencies]
 python = ">=3.9,<3.11"
 mido = "^1.2.10"

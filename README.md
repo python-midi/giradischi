@@ -22,7 +22,7 @@ pip3 install giradischi
 ## How to use
 
 ```sh
-python3 -m giradischi
+giradischi
 ```
 
 ```
