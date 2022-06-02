@@ -107,7 +107,7 @@ class GiradischiUI(QApplication):
 	def _update_time_label(self, time: float):
 		if self.midi_player.is_playing():
 			self.current_time_label.setText(self._format_time(time))
-			self.progress_bar.setValue(time / self.midi_player.file.length * 100)
+			self.progress_bar.setValue(time)
 		else:
 			self.current_time_label.setText("00:00")
 			self.progress_bar.setValue(0)
@@ -130,6 +130,7 @@ class GiradischiUI(QApplication):
 		self.midi_player.open_file(self.opened_file)
 		self.title_label.setText(self.opened_file.name)
 		self.duration_time_label.setText(self._format_time(self.midi_player.file.length))
+		self.progress_bar.setMaximum(self.midi_player.file.length)
 
 	def _play_pause(self) -> None:
 		self.midi_player.toggle()
