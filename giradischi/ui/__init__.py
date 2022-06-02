@@ -93,8 +93,8 @@ class GiradischiUI(QApplication):
 
 		self.update_time.connect(self._update_time_label)
 
-		self.thread = Thread(target=self._daemon, daemon=True)
-		self.thread.start()
+		self.time_label_thread = Thread(target=self._daemon, daemon=True)
+		self.time_label_thread.start()
 
 		if file and file.suffix == ".mid":
 			self._open_file(file)
