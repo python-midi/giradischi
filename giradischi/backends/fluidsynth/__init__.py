@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
+"""giradischi FluidSynth backend."""
 
 try:
 	from giradischi.backends.fluidsynth import mido_backend

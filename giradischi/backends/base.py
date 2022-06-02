@@ -32,7 +32,8 @@ class MidiOutputBackendBase:
 		raise NotImplementedError
 
 	def get_devices(self) -> list[str]:
-		"""Returns a list of MIDI output devices available on the system.
+		"""
+		Returns a list of MIDI output devices available on the system.
 
 		If only one device is always available (like for virtual synthesizers), either return
 		the name of the device or a dummy one (like "default" or "virtual").
@@ -41,22 +42,27 @@ class MidiOutputBackendBase:
 		raise NotImplementedError
 
 	def get_device(self) -> str:
-		"""Returns the current MIDI device.
+		"""
+		Returns the current MIDI device.
 
 		If can_have_multiple_devices() returns False,
-		return the device returned by get_devices()."""
+		return the device returned by get_devices().
+		"""
 		raise NotImplementedError
 
 	def set_device(self, device: str) -> None:
-		"""Sets the MIDI device to use.
+		"""
+		Sets the MIDI device to use.
 
 		Value should be one of the values returned by get_devices().
 
-		If can_have_multiple_devices() returns False, don't implement this method."""
+		If can_have_multiple_devices() returns False, don't implement this method.
+		"""
 		raise NotImplementedError
 
 	def open_device(self, **kwargs) -> BaseOutput:
-		"""Opens the MIDI device.
+		"""
+		Opens the MIDI device.
 
 		Returns a BaseOutput instance.
 		Assert that the device is set before calling this function.

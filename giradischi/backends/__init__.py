@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
-"""giradischi MIDI output backends"""
+"""giradischi MIDI output backends."""
 
 from typing import Type
 

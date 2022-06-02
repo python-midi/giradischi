@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
+"""giradischi ALSA MIDI backend."""
 
 try:
 	from alsa_midi import mido_backend

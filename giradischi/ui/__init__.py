@@ -32,6 +32,7 @@ class GiradischiUI(QApplication):
 	update_time = Signal(float)
 
 	def __init__(self, file: Path = None) -> None:
+		"""Initialize the UI."""
 		super().__init__()
 		self.setApplicationName("giradischi")
 		self.setApplicationDisplayName("Giradischi")
@@ -140,7 +141,8 @@ class GiradischiUI(QApplication):
 	def _stop(self):
 		self.midi_player.stop()
 
-	def _format_time(self, time: float) -> str:
+	@staticmethod
+	def _format_time(time: float) -> str:
 		minutes = int(time // 60)
 		seconds = int(time % 60)
 		return f"{minutes:02}:{seconds:02}"

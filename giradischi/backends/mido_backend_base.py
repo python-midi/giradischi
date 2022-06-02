@@ -18,6 +18,7 @@ class MidoBackendOutputBackendBase(MidiOutputBackendBase):
 	api: str
 
 	def __init__(self) -> None:
+		"""Initializes the backend."""
 		super().__init__()
 
 		self.device = None

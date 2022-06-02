@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
+"""giradischi PortMidi backend."""
 
 try:
 	from mido.backends import portmidi
