@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Giradischi
+Comment=MIDI player
+Type=Application
+Terminal=false
+Exec=giradischi %F
+Categories=AudioVideo;Audio;Sequencer;
+X-AppInstall-Package=giradischi
+X-AppInstall-Section=universe
+MimeType=audio/midi;audio/x-mod;
+Keywords=midi;sequencer
