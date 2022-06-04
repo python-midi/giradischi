@@ -21,7 +21,7 @@ class MidiPlayer:
 		if not self.backend:
 			backends = get_available_backends()
 			if backends:
-				self.backend = backends[0]
+				self.backend = backends[0]()
 
 		self.file: MidiFile = None
 
