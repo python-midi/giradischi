@@ -9,14 +9,20 @@ from pathlib import Path
 from threading import Thread, Event
 from time import sleep, time
 
-from giradischi.backends import DEFAULT_BACKEND
+from giradischi.backends import get_available_backends
 from giradischi.backends.base import MidiOutputBackendBase
 
 class MidiPlayer:
 	"""A basic MIDI player, with play/pause/stop functionality."""
 	def __init__(self, backend: MidiOutputBackendBase = None) -> None:
 		"""Create a new MIDI player."""
-		self.backend = backend if backend else DEFAULT_BACKEND()
+		self.backend = backend
+
+		if not self.backend:
+			backends = get_available_backends()
+			if backends:
+				self.backend = backends[0]
+
 		self.file: MidiFile = None
 
 		self.is_started = False

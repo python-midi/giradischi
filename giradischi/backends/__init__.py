@@ -22,8 +22,6 @@ BACKENDS: list[Type[MidiOutputBackendBase]] = [
 	RtMidiOutputBackend,
 ]
 
-DEFAULT_BACKEND = RtMidiOutputBackend
-
 def get_available_backends() -> list[Type[MidiOutputBackendBase]]:
 	"""Get a list of available backends."""
 	return [backend for backend in BACKENDS if backend.is_available()]
