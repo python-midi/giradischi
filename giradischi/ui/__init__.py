@@ -134,12 +134,19 @@ class GiradischiUI(QApplication):
 		self.progress_bar.setMaximum(self.midi_player.file.length)
 
 	def _play_pause(self) -> None:
-		self.midi_player.toggle()
+		try:
+			self.midi_player.toggle()
+		except Exception as e:
+			self.status_bar.showMessage(f"Error: {e}")
+
 		icon = QStyle.SP_MediaPause if self.midi_player.is_playing() else QStyle.SP_MediaPlay
 		self.play_button.setIcon(self.style().standardIcon(icon))
 
 	def _stop(self):
-		self.midi_player.stop()
+		try:
+			self.midi_player.stop()
+		except Exception as e:
+			self.status_bar.showMessage(f"Error: {e}")
 
 	@staticmethod
 	def _format_time(time: float) -> str:

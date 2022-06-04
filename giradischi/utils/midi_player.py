@@ -94,11 +94,17 @@ class MidiPlayer:
 
 	def open_file(self, midi_file: Path) -> None:
 		"""Stops the current playing file if needed and loads a new one."""
-		self.stop()
+		try:
+			self.stop()
+		except Exception:
+			pass
+
 		self.file = MidiFile(midi_file)
 
 	def play(self) -> None:
 		"""Start playing the current file."""
+		self._check_backend()
+
 		if self.is_playing():
 			return
 
@@ -109,6 +115,8 @@ class MidiPlayer:
 
 	def pause(self) -> None:
 		"""Pause the current playing file."""
+		self._check_backend()
+
 		if self.is_paused():
 			return
 
@@ -123,9 +131,15 @@ class MidiPlayer:
 
 	def stop(self) -> None:
 		"""Stop the current playing file and unload it from the daemon."""
+		self._check_backend()
+
 		if self.is_stopped():
 			return
 
 		self.stop_event.set()
 		# Let the thread resume and handle the stop event
 		self.play_event.set()
+
+	def _check_backend(self) -> None:
+		if not self.backend:
+			raise RuntimeError("No backend available")
