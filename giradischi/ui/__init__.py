@@ -167,14 +167,16 @@ class GiradischiUI(QApplication):
 		self.backend_selector_dialog.show()
 
 	def _open_backend_settings_dialog(self):
+		if not self.midi_player.backend:
+			return
+
 		devices = self.midi_player.backend.get_devices()
 		self.backend_settings_list_widget.clear()
 		self.backend_settings_list_widget.addItems(devices)
 
-		if self.midi_player.backend:
-			current_device = self.midi_player.backend.get_device()
-			if current_device in devices:
-				self.backend_settings_list_widget.setCurrentRow(devices.index(current_device))
+		current_device = self.midi_player.backend.get_device()
+		if current_device in devices:
+			self.backend_settings_list_widget.setCurrentRow(devices.index(current_device))
 
 		self.backend_settings_dialog.show()
 
