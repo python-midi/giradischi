@@ -106,7 +106,7 @@ class GiradischiUI(QApplication):
 		self.exec()
 
 	def _update_time_label(self, time: float):
-		if self.midi_player.is_playing():
+		if not self.midi_player.is_stopped():
 			self.current_time_label.setText(self._format_time(time))
 			self.progress_bar.setValue(time)
 		else:
