@@ -12,12 +12,14 @@ from giradischi.backends.base import MidiOutputBackendBase
 # Backends
 from giradischi.backends.alsamidi import AlsaMidiOutputBackend
 from giradischi.backends.fluidsynth import FluidSynthOutputBackend
+from giradischi.backends.kdmapi import KDMAPIOutputBackend
 from giradischi.backends.portmidi import PortMidiOutputBackend
 from giradischi.backends.rtmidi import RtMidiOutputBackend
 
 BACKENDS: list[Type[MidiOutputBackendBase]] = [
 	AlsaMidiOutputBackend,
 	FluidSynthOutputBackend,
+	KDMAPIOutputBackend,
 	PortMidiOutputBackend,
 	RtMidiOutputBackend,
 ]
