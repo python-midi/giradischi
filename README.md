@@ -17,6 +17,7 @@ pip3 install giradischi
 
 -   ALSA MIDI: Install [alsa-midi](https://pypi.org/project/alsa-midi/) with `pip3 install alsa-midi` and follow the instructions provided [here](https://python-alsa-midi.readthedocs.io/en/latest/overview.html#installation)
 -   FluidSynth: Install [pyFluidSynth](https://pypi.org/project/pyFluidSynth/) with `pip3 install pyFluidSynth` and follow the instructions provided [here](https://github.com/nwhitehead/pyfluidsynth#requirements)
+-   KDMAPI: Install [kdmapi](https://pypi.org/project/kdmapi/) with `pip3 install kdmapi` and follow the instructions provided [here](https://github.com/SebaUbuntu/kdmapi)
 -   PortMidi: Follow the instructions provided [here](https://mido.readthedocs.io/en/latest/backends/portmidi.html)
 -   RtMidi: Install [python-rtmidi](https://pypi.org/project/python-rtmidi) with `pip3 install python-rtmidi` or install [rtmidi-python](https://pypi.org/project/rtmidi-python) with `pip3 install rtmidi-python`
 
