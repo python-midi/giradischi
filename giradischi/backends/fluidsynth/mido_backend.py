@@ -6,6 +6,7 @@
 
 from fluidsynth import Synth
 from mido.ports import BaseOutput
+from typing import Dict
 
 def get_devices():
 	return [
@@ -17,8 +18,8 @@ def get_devices():
 	]
 
 # Apparently we can't create attributes on BaseOutput classes
-_synths: dict[int, Synth] = {}
-_sfids: dict[int, int] = {}
+_synths: Dict[int, Synth] = {}
+_sfids: Dict[int, int] = {}
 
 class Output(BaseOutput):
 	def _open(self, **kwargs):

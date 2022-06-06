@@ -56,8 +56,8 @@ python-versions = "<3.11,>=3.6"
 
 [metadata]
 lock-version = "1.1"
-python-versions = ">=3.9,<3.11"
-content-hash = "41b8bbad8c0c2f38de71cca903f496830465f2f86f93ea2489e7cb37774b99bc"
+python-versions = ">=3.8,<3.11"
+content-hash = "fe71ed70386e4139c6b2e57bc0737e79a7c8b0d379044efddbffef9dd5f68a7b"
 
 [metadata.files]
 mido = [

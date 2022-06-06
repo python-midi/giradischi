@@ -11,7 +11,7 @@ repository = "https://github.com/SebaUbuntu/giradischi"
 giradischi = 'giradischi.main:main'
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.11"
+python = ">=3.8,<3.11"
 mido = "^1.2.10"
 PySide6 = "^6.2.4"
 

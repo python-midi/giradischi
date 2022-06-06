@@ -5,7 +5,7 @@
 
 GUI MIDI player supporting multiple backends
 
-Requires Python 3.9
+Requires Python 3.8 or greater
 
 ## Installation
 

@@ -5,6 +5,7 @@
 #
 
 from mido.ports import BaseOutput
+from typing import List
 
 class MidiOutputBackendBase:
 	"""MIDI output backend."""
@@ -31,7 +32,7 @@ class MidiOutputBackendBase:
 		"""Returns True if the backend can have multiple devices."""
 		raise NotImplementedError
 
-	def get_devices(self) -> list[str]:
+	def get_devices(self) -> List[str]:
 		"""
 		Returns a list of MIDI output devices available on the system.
 

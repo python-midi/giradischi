@@ -5,7 +5,7 @@
 #
 """giradischi MIDI output backends."""
 
-from typing import Type
+from typing import List, Type
 
 from giradischi.backends.base import MidiOutputBackendBase
 
@@ -16,7 +16,7 @@ from giradischi.backends.kdmapi import KDMAPIOutputBackend
 from giradischi.backends.portmidi import PortMidiOutputBackend
 from giradischi.backends.rtmidi import RtMidiOutputBackend
 
-BACKENDS: list[Type[MidiOutputBackendBase]] = [
+BACKENDS: List[Type[MidiOutputBackendBase]] = [
 	AlsaMidiOutputBackend,
 	FluidSynthOutputBackend,
 	KDMAPIOutputBackend,
@@ -24,7 +24,7 @@ BACKENDS: list[Type[MidiOutputBackendBase]] = [
 	RtMidiOutputBackend,
 ]
 
-def get_available_backends() -> list[Type[MidiOutputBackendBase]]:
+def get_available_backends() -> List[Type[MidiOutputBackendBase]]:
 	"""Get a list of available backends."""
 	return [backend for backend in BACKENDS if backend.is_available()]
 

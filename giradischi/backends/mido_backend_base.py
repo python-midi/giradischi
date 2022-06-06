@@ -5,12 +5,12 @@
 #
 
 from mido.ports import BaseOutput
-from typing import Callable, Type
+from typing import Callable, List, Type
 
 from giradischi.backends.base import MidiOutputBackendBase
 
 class MidoBackend:
-	get_devices: Callable[[], list[dict]]
+	get_devices: Callable[[], List[dict]]
 	Output: Type[BaseOutput]
 
 class MidoBackendOutputBackendBase(MidiOutputBackendBase):
