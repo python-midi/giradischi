@@ -21,11 +21,13 @@ pip3 install giradischi
 -   PortMidi: Follow the instructions provided [here](https://mido.readthedocs.io/en/latest/backends/portmidi.html)
 -   RtMidi: Install [python-rtmidi](https://pypi.org/project/python-rtmidi) with `pip3 install python-rtmidi` or install [rtmidi-python](https://pypi.org/project/rtmidi-python) with `pip3 install rtmidi-python`
 
-## How to use
+## Instructions
 
 ```sh
-giradischi
+python3 -m giradischi
 ```
+
+## License
 
 ```
 #
