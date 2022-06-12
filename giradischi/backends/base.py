@@ -4,33 +4,22 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
 
-from mido.ports import BaseOutput
+from libmidi_io.types.backend import BackendModule
+from libmidi_io.types.port import BasePort
 from typing import List
 
-class MidiOutputBackendBase:
+class BaseMidiOutputBackend:
 	"""MIDI output backend."""
-	def __init__(self):
+	def __init__(self, name: str, backend: BackendModule):
 		"""Initialize the MIDI output backend."""
-		if not self.is_available():
-			raise RuntimeError("Backend not available")
+		self.name = name
+		self.backend = backend
 
-	@classmethod
-	def get_name(cls) -> str:
-		"""Returns the name of the backend."""
-		raise NotImplementedError
+		self.device: str = None
 
-	@classmethod
-	def is_available(cls) -> bool:
-		"""Returns True if the backend is available on the system."""
-		raise NotImplementedError
-
-	def is_virtual(self) -> bool:
-		"""Returns True if the device is virtual."""
-		raise NotImplementedError
-
-	def can_have_multiple_devices(self) -> bool:
-		"""Returns True if the backend can have multiple devices."""
-		raise NotImplementedError
+		devices = self.get_devices()
+		if devices:
+			self.device = devices[0]
 
 	def get_devices(self) -> List[str]:
 		"""
@@ -40,32 +29,33 @@ class MidiOutputBackendBase:
 		the name of the device or a dummy one (like "default" or "virtual").
 		If no device is available, return an empty list.
 		"""
-		raise NotImplementedError
+		devices = self.backend.get_devices()
+
+		return [device.name for device in devices if device.is_output]
 
 	def get_device(self) -> str:
-		"""
-		Returns the current MIDI device.
-
-		If can_have_multiple_devices() returns False,
-		return the device returned by get_devices().
-		"""
-		raise NotImplementedError
+		"""Returns the current MIDI device."""
+		return self.device
 
 	def set_device(self, device: str) -> None:
 		"""
 		Sets the MIDI device to use.
 
 		Value should be one of the values returned by get_devices().
-
-		If can_have_multiple_devices() returns False, don't implement this method.
 		"""
-		raise NotImplementedError
+		devices = self.get_devices()
 
-	def open_device(self, **kwargs) -> BaseOutput:
+		assert device in devices, "Device not found"
+
+		self.device = device
+
+	def open_device(self, **kwargs) -> BasePort:
 		"""
 		Opens the MIDI device.
 
 		Returns a BaseOutput instance.
 		Assert that the device is set before calling this function.
 		"""
-		raise NotImplementedError
+		assert self.device is not None, "No device set"
+
+		return self.backend.Port(name=self.device, **kwargs)

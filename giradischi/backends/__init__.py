@@ -5,33 +5,19 @@
 #
 """giradischi MIDI output backends."""
 
-from typing import List, Type
+from libmidi_io.backends import get_available_backends
 
-from giradischi.backends.base import MidiOutputBackendBase
+from giradischi.backends.base import BaseMidiOutputBackend
 
-# Backends
-from giradischi.backends.alsamidi import AlsaMidiOutputBackend
-from giradischi.backends.fluidsynth import FluidSynthOutputBackend
-from giradischi.backends.kdmapi import KDMAPIOutputBackend
-from giradischi.backends.portmidi import PortMidiOutputBackend
-from giradischi.backends.rtmidi import RtMidiOutputBackend
-
-BACKENDS: List[Type[MidiOutputBackendBase]] = [
-	AlsaMidiOutputBackend,
-	FluidSynthOutputBackend,
-	KDMAPIOutputBackend,
-	PortMidiOutputBackend,
-	RtMidiOutputBackend,
+backends = [
+	BaseMidiOutputBackend(name, backend)
+	for name, backend in get_available_backends().items()
 ]
-
-def get_available_backends() -> List[Type[MidiOutputBackendBase]]:
-	"""Get a list of available backends."""
-	return [backend for backend in BACKENDS if backend.is_available()]
 
 def get_backend_by_name(name: str):
 	"""Find a backend by name."""
-	for backend in BACKENDS:
-		if backend.get_name() == name:
+	for backend in backends:
+		if backend.name == name:
 			return backend
 
 	raise ValueError(f"Backend {name} not found")

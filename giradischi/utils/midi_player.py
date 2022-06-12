@@ -4,24 +4,24 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
 
-from mido import MidiFile
+from libmidi.types.messages.meta import BaseMessageMeta
+from libmidi.types.midifile import MidiFile
 from pathlib import Path
 from threading import Thread, Event
 from time import sleep, time
 
-from giradischi.backends import get_available_backends
-from giradischi.backends.base import MidiOutputBackendBase
+from giradischi.backends import backends
+from giradischi.backends.base import BaseMidiOutputBackend
 
 class MidiPlayer:
 	"""A basic MIDI player, with play/pause/stop functionality."""
-	def __init__(self, backend: MidiOutputBackendBase = None) -> None:
+	def __init__(self, backend: BaseMidiOutputBackend = None) -> None:
 		"""Create a new MIDI player."""
 		self.backend = backend
 
 		if not self.backend:
-			backends = get_available_backends()
 			if backends:
-				self.backend = backends[0]()
+				self.backend = backends[0]
 
 		self.file: MidiFile = None
 
@@ -35,7 +35,7 @@ class MidiPlayer:
 		self.thread = Thread(target=self._daemon, daemon=True)
 		self.thread.start()
 
-	def set_backend(self, backend: MidiOutputBackendBase) -> None:
+	def set_backend(self, backend: BaseMidiOutputBackend) -> None:
 		if self.is_started:
 			raise RuntimeError("Cannot change backend while playing, stop first")
 
@@ -63,8 +63,8 @@ class MidiPlayer:
 				start_time = time()
 				self.current_time = 0.0
 
-				for msg in self.file:
-					self.current_time += msg.time
+				for event in self.file:
+					self.current_time += event.delta_time
 
 					playback_time = time() - start_time
 					duration_to_next_event = self.current_time - playback_time
@@ -72,7 +72,7 @@ class MidiPlayer:
 					if duration_to_next_event > 0.0:
 						sleep(duration_to_next_event)
 
-					if msg.is_meta:
+					if isinstance(event.message, BaseMessageMeta):
 						continue
 
 					if self.stop_event.is_set():
@@ -80,7 +80,7 @@ class MidiPlayer:
 						break
 
 					if self.play_event.is_set():
-						output.send(msg)
+						output.send(event.message)
 					else:
 						# Panic if the user has paused the playback
 						output.panic()
@@ -99,7 +99,7 @@ class MidiPlayer:
 		except Exception:
 			pass
 
-		self.file = MidiFile(midi_file)
+		self.file = MidiFile.from_file(midi_file)
 
 	def play(self) -> None:
 		"""Start playing the current file."""

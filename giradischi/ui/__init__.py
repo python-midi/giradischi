@@ -23,7 +23,7 @@ from pathlib import Path
 from threading import Thread
 from time import sleep
 
-from giradischi.backends import get_backend_by_name, get_available_backends
+from giradischi.backends import backends, get_backend_by_name
 from giradischi.utils.midi_player import MidiPlayer
 
 ui_path = Path(__file__).parent
@@ -130,8 +130,9 @@ class GiradischiUI(QApplication):
 		self.opened_file = file
 		self.midi_player.open_file(self.opened_file)
 		self.title_label.setText(self.opened_file.name)
-		self.duration_time_label.setText(self._format_time(self.midi_player.file.length))
-		self.progress_bar.setMaximum(self.midi_player.file.length)
+		file_length = self.midi_player.file.get_length()
+		self.duration_time_label.setText(self._format_time(file_length))
+		self.progress_bar.setMaximum(file_length)
 
 	def _update_play_pause_button_icon(self, playing: bool):
 		self.play_button.setIcon(self.style().standardIcon(QStyle.SP_MediaPause
@@ -164,14 +165,14 @@ class GiradischiUI(QApplication):
 		return f"{minutes:02}:{seconds:02}"
 
 	def _open_backend_selector_dialog(self):
-		backends = [backend.get_name() for backend in get_available_backends()]
+		backends_names = [backend.name for backend in backends]
 		self.backend_selector_list_widget.clear()
-		self.backend_selector_list_widget.addItems(backends)
+		self.backend_selector_list_widget.addItems(backends_names)
 
 		if self.midi_player.backend:
-			current_backend = self.midi_player.backend.get_name()
-			if current_backend in backends:
-				self.backend_selector_list_widget.setCurrentRow(backends.index(current_backend))
+			current_backend = self.midi_player.backend.name
+			if current_backend in backends_names:
+				self.backend_selector_list_widget.setCurrentRow(backends_names.index(current_backend))
 
 		self.backend_selector_dialog.show()
 
@@ -191,11 +192,11 @@ class GiradischiUI(QApplication):
 
 	def _change_backend(self, item: QListWidgetItem):
 		new_backend_name = item.text()
-		if self.midi_player.backend and (new_backend_name == self.midi_player.backend.get_name()):
+		if self.midi_player.backend and (new_backend_name == self.midi_player.backend.name):
 			return
 
 		try:
-			backend = get_backend_by_name(new_backend_name)()
+			backend = get_backend_by_name(new_backend_name)
 		except Exception as e:
 			self.status_bar.showMessage(f"Error: {e}")
 			return
