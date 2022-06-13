@@ -1,6 +1,6 @@
 [[package]]
 name = "libmidi"
-version = "1.0.1"
+version = "1.1.0"
 description = "MIDI library"
 category = "main"
 optional = false
@@ -71,8 +71,8 @@ content-hash = "a210441ea1444522fe26552a04b9b36762b358ed51126209a0ee2c91fc6cff2f
 
 [metadata.files]
 libmidi = [
-    {file = "libmidi-1.0.1-py3-none-any.whl", hash = "sha256:3267679e753f0eb8ab843118e64f45403d308cd9136a5e4efe3b194d10cedb1f"},
-    {file = "libmidi-1.0.1.tar.gz", hash = "sha256:aa0ac2f0944cf34a5855cf5bd6e6e94f9a57a76d688a8dc0fe9f4085efc69c4a"},
+    {file = "libmidi-1.1.0-py3-none-any.whl", hash = "sha256:825d9711ba0c8d2a27150112f0a84e166a65fa703cb293549ac9b56f686b79d2"},
+    {file = "libmidi-1.1.0.tar.gz", hash = "sha256:119e70134cd059fad8bdb335b948d7d6187e6dc9b9458699cee1338b4776a100"},
 ]
 libmidi-io = [
     {file = "libmidi_io-1.0.1-py3-none-any.whl", hash = "sha256:c74372c08b47452c2146eb8770c6196deb279f0930120abbbca4f0c7f7b85ddc"},
