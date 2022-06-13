@@ -5,7 +5,7 @@ description = "GUI MIDI player supporting multiple backends"
 authors = ["Sebastiano Barezzi <barezzisebastiano@gmail.com>"]
 license = "LGPL-3.0-or-later"
 readme = "README.md"
-repository = "https://github.com/SebaUbuntu/giradischi"
+repository = "https://github.com/python-midi/giradischi"
 
 [tool.poetry.scripts]
 giradischi = 'giradischi.main:main'
