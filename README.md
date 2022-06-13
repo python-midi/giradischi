@@ -1,7 +1,7 @@
 # giradischi
 
 [![PyPi version](https://img.shields.io/pypi/v/giradischi)](https://pypi.org/project/giradischi/)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/c6d1edc8e4bc45a9b96eed73c55e3128)](https://www.codacy.com/gh/SebaUbuntu/giradischi/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SebaUbuntu/giradischi&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/2dde80e0294d42ecbfb422f1f6cf7644)](https://www.codacy.com/gh/python-midi/giradischi/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=python-midi/giradischi&amp;utm_campaign=Badge_Grade)
 
 GUI MIDI player supporting multiple backends
 
