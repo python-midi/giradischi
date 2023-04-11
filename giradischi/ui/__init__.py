@@ -139,10 +139,14 @@ class GiradischiUI(QApplication):
 		self.duration_time_label.setText(self._format_time(file_length))
 		self.progress_bar.setMaximum(file_length)
 
-	def _update_play_pause_button_icon(self, playing: bool):
+	def _update_midi_player_ui(self, stopping: bool = False):
+		is_playing = self.midi_player.play_event.is_set()
+		is_stopped = self.midi_player.stop_event.is_set()
+
 		self.play_button.setIcon(self.style().standardIcon(QStyle.SP_MediaPause
-		                                                   if playing
+		                                                   if is_playing and not stopping
 		                                                   else QStyle.SP_MediaPlay))
+		self.settings_button.setEnabled(not is_stopped)
 
 	def _play_pause(self) -> None:
 		try:
@@ -151,8 +155,7 @@ class GiradischiUI(QApplication):
 			self.status_bar.showMessage(f"Error: {e}")
 			return
 
-		is_playing = self.midi_player.play_event.is_set()
-		self._update_play_pause_button_icon(is_playing)
+		self._update_midi_player_ui()
 
 	def _stop(self):
 		try:
@@ -161,7 +164,7 @@ class GiradischiUI(QApplication):
 			self.status_bar.showMessage(f"Error: {e}")
 			return
 
-		self._update_play_pause_button_icon(False)
+		self._update_midi_player_ui(True)
 
 	@staticmethod
 	def _format_time(time: float) -> str:
