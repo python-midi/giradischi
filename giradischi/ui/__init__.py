@@ -22,6 +22,7 @@ from PySide6.QtWidgets import (
 from pathlib import Path
 from threading import Thread
 from time import sleep
+from typing import Optional
 
 from giradischi.backends import backends, get_backend_by_name
 from giradischi.utils.midi_player import MidiPlayer
@@ -31,7 +32,7 @@ ui_path = Path(__file__).parent
 class GiradischiUI(QApplication):
 	update_time = Signal(float)
 
-	def __init__(self, file: Path = None) -> None:
+	def __init__(self, file: Optional[Path] = None) -> None:
 		"""Initialize the UI."""
 		super().__init__()
 		self.setApplicationName("giradischi")
@@ -90,7 +91,7 @@ class GiradischiUI(QApplication):
 		self.backend_settings_list_widget.itemClicked.connect(self._change_device)
 
 		self.midi_player = MidiPlayer()
-		self.opened_file: Path = None
+		self.opened_file: Optional[Path] = None
 
 		self.update_time.connect(self._update_time_label)
 
@@ -128,8 +129,12 @@ class GiradischiUI(QApplication):
 
 	def _open_file(self, file: Path):
 		self.opened_file = file
+
 		self.midi_player.open_file(self.opened_file)
+		assert self.midi_player.file, "MidiFile is None"
+
 		self.title_label.setText(self.opened_file.name)
+
 		file_length = self.midi_player.file.get_length()
 		self.duration_time_label.setText(self._format_time(file_length))
 		self.progress_bar.setMaximum(file_length)
@@ -207,4 +212,5 @@ class GiradischiUI(QApplication):
 			self.status_bar.showMessage(f"Error: {e}")
 
 	def _change_device(self, item: QListWidgetItem):
+		assert self.midi_player.backend, "Backend is None"
 		self.midi_player.backend.set_device(item.text())

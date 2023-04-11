@@ -9,13 +9,14 @@ from libmidi.types.midifile import MidiFile
 from pathlib import Path
 from threading import Thread, Event
 from time import sleep, time
+from typing import Optional
 
 from giradischi.backends import backends
 from giradischi.backends.base import BaseMidiOutputBackend
 
 class MidiPlayer:
 	"""A basic MIDI player, with play/pause/stop functionality."""
-	def __init__(self, backend: BaseMidiOutputBackend = None) -> None:
+	def __init__(self, backend: Optional[BaseMidiOutputBackend] = None) -> None:
 		"""Create a new MIDI player."""
 		self.backend = backend
 
@@ -23,7 +24,7 @@ class MidiPlayer:
 			if backends:
 				self.backend = backends[0]
 
-		self.file: MidiFile = None
+		self.file: Optional[MidiFile] = None
 
 		self.is_started = False
 
@@ -57,6 +58,10 @@ class MidiPlayer:
 		while True:
 			self.play_event.wait()
 			self.stop_event.clear()
+
+			assert self.file, "No file loaded"
+			assert self.backend, "No backend set"
+
 			with self.backend.open_device() as output:
 				self.is_started = True
 

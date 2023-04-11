@@ -6,7 +6,7 @@
 
 from libmidi_io.types.backend import BackendModule
 from libmidi_io.types.port import BasePort
-from typing import List
+from typing import List, Optional
 
 class BaseMidiOutputBackend:
 	"""MIDI output backend."""
@@ -15,7 +15,7 @@ class BaseMidiOutputBackend:
 		self.name = name
 		self.backend = backend
 
-		self.device: str = None
+		self.device: Optional[str] = None
 
 		devices = self.get_devices()
 		if devices:
@@ -33,7 +33,7 @@ class BaseMidiOutputBackend:
 
 		return [device.name for device in devices if device.is_output]
 
-	def get_device(self) -> str:
+	def get_device(self) -> Optional[str]:
 		"""Returns the current MIDI device."""
 		return self.device
 
