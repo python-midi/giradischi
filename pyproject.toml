@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "giradischi"
-version = "1.1.0"
+version = "1.2.0"
 description = "GUI MIDI player supporting multiple backends"
-authors = ["Sebastiano Barezzi <barezzisebastiano@gmail.com>"]
+authors = ["Sebastiano Barezzi <seba@sebaubuntu.dev>"]
 license = "LGPL-3.0-or-later"
 readme = "README.md"
 repository = "https://github.com/python-midi/giradischi"
@@ -11,12 +11,10 @@ repository = "https://github.com/python-midi/giradischi"
 giradischi = 'giradischi.main:main'
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.11"
-libmidi = "^1.0.1"
-libmidi-io = "^1.0.1"
-PySide6 = "^6.2.4"
-
-[tool.poetry.dev-dependencies]
+python = ">=3.9,<3.14"
+libmidi = "^1.1.0"
+libmidi-io = "^1.1.0"
+PySide6 = "^6.9.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

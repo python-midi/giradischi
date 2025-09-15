@@ -5,26 +5,26 @@
 
 GUI MIDI player supporting multiple backends
 
-Requires Python 3.8 or greater
+Requires Python 3.9 or greater
 
 ## Installation
 
 ```sh
-pip3 install giradischi
+pip install giradischi
 ```
 
 ### Backends
 
--   ALSA MIDI: Install [alsa-midi](https://pypi.org/project/alsa-midi/) with `pip3 install alsa-midi` and follow the instructions provided [here](https://python-alsa-midi.readthedocs.io/en/latest/overview.html#installation)
--   FluidSynth: Install [pyFluidSynth](https://pypi.org/project/pyFluidSynth/) with `pip3 install pyFluidSynth` and follow the instructions provided [here](https://github.com/nwhitehead/pyfluidsynth#requirements)
--   KDMAPI: Install [kdmapi](https://pypi.org/project/kdmapi/) with `pip3 install kdmapi` and follow the instructions provided [here](https://github.com/SebaUbuntu/kdmapi)
+-   ALSA MIDI: Install [alsa-midi](https://pypi.org/project/alsa-midi/) with `pip install alsa-midi` and follow the instructions provided [here](https://python-alsa-midi.readthedocs.io/en/latest/overview.html#installation)
+-   FluidSynth: Install [pyFluidSynth](https://pypi.org/project/pyFluidSynth/) with `pip install pyFluidSynth` and follow the instructions provided [here](https://github.com/nwhitehead/pyfluidsynth#requirements)
+-   KDMAPI: Install [kdmapi](https://pypi.org/project/kdmapi/) with `pip install kdmapi` and follow the instructions provided [here](https://github.com/SebaUbuntu/kdmapi)
 -   PortMidi: Follow the instructions provided [here](https://mido.readthedocs.io/en/latest/backends/portmidi.html)
--   RtMidi: Install [python-rtmidi](https://pypi.org/project/python-rtmidi) with `pip3 install python-rtmidi` or install [rtmidi-python](https://pypi.org/project/rtmidi-python) with `pip3 install rtmidi-python`
+-   RtMidi: Install [python-rtmidi](https://pypi.org/project/python-rtmidi) with `pip install python-rtmidi` or install [rtmidi-python](https://pypi.org/project/rtmidi-python) with `pip install rtmidi-python`
 
 ## Instructions
 
 ```sh
-python3 -m giradischi
+python -m giradischi
 ```
 
 ## License
